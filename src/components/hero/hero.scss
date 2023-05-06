@@ -1,0 +1,103 @@
+input[type="number"]::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  margin: 0;
+  display: none;
+}
+.hero__title {
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 40px;
+  text-align: center;
+  padding-top: 17px;
+}
+.hero__add-user {
+  margin-top: 30px;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 21px;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 7px;
+  background-color: blueviolet;
+  color: white;
+}
+.hero__modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  transform: scale(0);
+  transition: 0.3s;
+  max-width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.7);
+}
+.hero__modal-key {
+  transform: scale(1);
+}
+.TfiClose {
+  width: 30px;
+  height: 30px;
+  color: white;
+  position: fixed;
+  top: 160px;
+  right: 500px;
+}
+.hero__form {
+  text-align: center;
+  margin-top: 220px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+.firstNameInput,
+.lastNameInput,
+.ageInput {
+  max-width: 550px;
+  width: 100%;
+  padding: 25px 0 25px 25px;
+  outline: none;
+  border-radius: 15px;
+  border: none;
+}
+.firstNameInput,
+.lastNameInput,
+.ageInput::placeholder {
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 19px;
+}
+.form-btn {
+  background-color: blueviolet;
+  max-width: 230px;
+  width: 100%;
+  padding: 17px 0;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 23px;
+  color: white;
+  border: none;
+  border-radius: 15px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 55px;
+}
+th {
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-family: "Poppins";
+  font-weight: 500;
+}
+td {
+  border-bottom: 1px solid #ddd;
+  padding-top: 15px;
+}
+.MdModeEdit,
+.MdDelete {
+  margin-left: 7px;
+  width: 21px;
+  height: 21px;
+}
