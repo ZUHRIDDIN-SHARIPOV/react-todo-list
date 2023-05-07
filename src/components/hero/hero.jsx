@@ -12,36 +12,52 @@ const Hero = () => {
   const [firstNameValue, setFirstNameValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
   const [ageValue, setAgeValue] = useState("");
-
+  const [edit, setEdit] = useState(null);
+  const [buttonText, setButtonText] = useState("Submit");
   const [data, setData] = useState(() => {
     const storedItem = localStorage.getItem("data");
     return storedItem ? JSON.parse(storedItem) : [];
   });
-
   const formDataSubmit = (event) => {
     event.preventDefault();
-
     if (!firstNameValue.trim())
       return alert("Firstname qismi bo`sh bo`lishi mumkin emas");
-
     if (!lastNameValue.trim())
       return alert("Lastname qismi bo`sh bo`lishi mumkin emas");
-
     if (!ageValue.trim()) return alert("Age qismi bo`sh bo`lishi mumkin emas");
-
-    setData([
-      ...data,
-      {
-        id: Date.now(),
-        firstName: firstNameValue,
-        lastName: lastNameValue,
-        age: ageValue,
-      },
-    ]);
-
-    setFirstNameValue("");
-    setLastNameValue("");
-    setAgeValue("");
+    if (edit !== null) {
+      const updateData = data.map((todos) => {
+        if (todos.id === edit) {
+          return {
+            ...todos,
+            firstName: firstNameValue,
+            lastName: lastNameValue,
+            age: ageValue,
+          };
+        } else {
+          return todos;
+        }
+      });
+      setData(updateData);
+      setEdit(null);
+      setFirstNameValue("");
+      setLastNameValue("");
+      setAgeValue("");
+      setButtonText("Submit");
+    } else {
+      setData([
+        ...data,
+        {
+          id: Date.now(),
+          firstName: firstNameValue,
+          lastName: lastNameValue,
+          age: ageValue,
+        },
+      ]);
+      setFirstNameValue("");
+      setLastNameValue("");
+      setAgeValue("");
+    }
   };
 
   localStorage.setItem("data", JSON.stringify(data));
@@ -59,6 +75,15 @@ const Hero = () => {
   const handleDelete = (id) => {
     const updateData = data.filter((data) => data.id !== id);
     return setData(updateData);
+  };
+
+  const handleEdit = (id) => {
+    const findEditId = data.find((todos) => todos.id === id);
+    setFirstNameValue(findEditId.firstName);
+    setLastNameValue(findEditId.lastName);
+    setAgeValue(findEditId.age);
+    setEdit(id);
+    setButtonText("Save");
   };
 
   return (
@@ -100,7 +125,7 @@ const Hero = () => {
                   onChange={handleChangeInputA}
                 />
                 <button className="form-btn" onClick={addUser} type="submit">
-                  Save
+                  {buttonText}
                 </button>
               </form>
             </div>
@@ -122,13 +147,16 @@ const Hero = () => {
                     <td>{data.firstName}</td>
                     <td>{data.lastName}</td>
                     <td>{data.age}</td>
-                    <td>
-                      <MdModeEdit className="MdModeEdit" />
+                    <td onClick={addUser}>
+                      <MdModeEdit
+                        className="MdModeEdit"
+                        onClick={() => handleEdit(data.id)}
+                      />
                     </td>
                     <td>
                       <MdDelete
-                        onClick={() => handleDelete(data.id)}
                         className="MdDelete"
+                        onClick={() => handleDelete(data.id)}
                       />
                     </td>
                   </tr>
