@@ -59,9 +59,7 @@ const Hero = () => {
       setAgeValue("");
     }
   };
-
   localStorage.setItem("data", JSON.stringify(data));
-
   const handleChangeInputF = (e) => {
     setFirstNameValue(e.target.value);
   };
@@ -71,12 +69,10 @@ const Hero = () => {
   const handleChangeInputA = (e) => {
     setAgeValue(e.target.value);
   };
-
   const handleDelete = (id) => {
     const updateData = data.filter((data) => data.id !== id);
     return setData(updateData);
   };
-
   const handleEdit = (id) => {
     const findEditId = data.find((todos) => todos.id === id);
     setFirstNameValue(findEditId.firstName);
@@ -85,7 +81,6 @@ const Hero = () => {
     setEdit(id);
     setButtonText("Save");
   };
-
   return (
     <>
       <section className="hero">
